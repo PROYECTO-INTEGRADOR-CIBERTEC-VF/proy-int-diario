@@ -1,24 +1,74 @@
-# Compiled class file
+# ==== Sistema operativo ====
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea
+
+# ==== Java / Maven ====
+target/
 *.class
-
-# Log file
-*.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
 *.jar
 *.war
-*.nar
 *.ear
+*.nar
+*.log
 *.zip
 *.tar.gz
 *.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# ==== Maven Wrapper ====
+!.mvn/wrapper/maven-wrapper.jar
+
+# ==== Spring Boot ====
+*.pid
+*.seed
+*.pid.lock
+spring.log
+
+# ==== IDEs ====
+
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# VS Code
+.vscode/
+
+# Eclipse / STS
+.project
+.classpath
+.settings/
+.apt_generated/
+.factorypath
+.springBeans
+.sts4-cache/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# ==== Archivos de entorno y secretos ====
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.jks
+
+# ==== Reportes / cobertura ====
+coverage/
+jacoco.exec
+/site/
+
+# ==== Temporales ====
+tmp/
+temp/
+*.tmp
+*.swp
+*~
