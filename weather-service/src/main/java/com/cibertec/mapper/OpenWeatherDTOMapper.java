@@ -6,12 +6,11 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = { WeatherDTOMapper.class })
 public interface OpenWeatherDTOMapper {
     @Mappings({
             @Mapping(target = "ubicacion", source = "name"),
-            @Mapping(target = "clima", source = "weather.description"),
-            @Mapping(target = "icono_clima", source = "weather.icon"),
+            @Mapping(target = "clima", source = "weather"),
             @Mapping(target = "temperatura", source = "main.temp"),
             @Mapping(target = "sensacion_termica", source = "main.feels_like"),
             @Mapping(target = "humedad", source = "main.humidity"),

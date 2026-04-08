@@ -4,7 +4,7 @@ import lombok.Builder;
 
 @Builder
 public record OpenWeatherExternalDTO(
-        WeatherDTO[] weather,
+        WeatherExternalDTO[] weather,
         MainDTO main,
         WindDTO wind,
         String name

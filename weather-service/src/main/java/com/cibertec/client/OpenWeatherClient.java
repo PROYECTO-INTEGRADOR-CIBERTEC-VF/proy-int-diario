@@ -17,6 +17,6 @@ public interface OpenWeatherClient {
             @RequestParam Double lat,
             @RequestParam Double lon,
             @RequestParam String appid,
-            @RequestParam(defaultValue = "es") String lang
+            @RequestParam String lang
     );
 }

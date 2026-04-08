@@ -5,8 +5,7 @@ import lombok.Builder;
 @Builder
 public record OpenWeatherInternalDTO(
         String ubicacion,
-        String clima,
-        String icono_clima,
+        WeatherInternalDTO[] clima,
         Double temperatura,
         Double sensacion_termica,
         Double humedad,
