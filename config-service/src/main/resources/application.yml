@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: config-service
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/PROYECTO-INTEGRADOR-CIBERTEC-VF/proy-int-diario-config
+          default-label: main
+          clone-on-start: true
+          timeout: 10
+server:
+  port: 8888
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,refresh
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    org.springframework.cloud.config: INFO
+
+
