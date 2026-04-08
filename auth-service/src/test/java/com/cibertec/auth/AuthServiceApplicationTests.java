@@ -1,4 +1,4 @@
-package com.cibertec;
+package com.cibertec.auth;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
