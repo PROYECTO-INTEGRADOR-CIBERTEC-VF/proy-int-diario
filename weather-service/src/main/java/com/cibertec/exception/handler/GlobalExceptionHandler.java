@@ -1,6 +1,7 @@
 package com.cibertec.exception.handler;
 
 import com.cibertec.dto.internal.ErrorInternalDTO;
+import com.cibertec.exception.LocationNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -37,5 +38,18 @@ public class GlobalExceptionHandler {
                 .build();
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorInternalDTO);
+    }
+
+    @ExceptionHandler(LocationNotFoundException.class)
+    public ResponseEntity<?> locationNotFoundExceptionHandler(
+            LocationNotFoundException exception
+    ) {
+        ErrorInternalDTO errorInternalDTO = ErrorInternalDTO
+                .builder()
+                .message(exception.getMessage())
+                .timestamp(LocalDateTime.now())
+                .build();
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorInternalDTO);
     }
 }

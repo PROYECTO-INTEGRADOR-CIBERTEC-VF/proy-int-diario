@@ -3,6 +3,7 @@ package com.cibertec.service.impl;
 import com.cibertec.client.OpenWeatherClient;
 import com.cibertec.dto.external.OpenWeatherExternalDTO;
 import com.cibertec.dto.internal.OpenWeatherInternalDTO;
+import com.cibertec.exception.LocationNotFoundException;
 import com.cibertec.mapper.OpenWeatherDTOMapper;
 import com.cibertec.service.OpenWeatherService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,10 @@ public class OpenWeatherServiceImpl implements OpenWeatherService {
     @Override
     public OpenWeatherInternalDTO getWeatherData(Double lat, Double lon, String lang) {
         OpenWeatherExternalDTO externalDTO = openWeatherClient.getWeatherData(lat, lon, apiKey, lang).getBody();
+
+        if (externalDTO != null && externalDTO.name().isBlank())
+            throw new LocationNotFoundException("No location found for coordinates: lat=" + lat + ", lon=" + lon);
+
         return openWeatherDTOMapper.toInternalDTO(externalDTO);
     }
 }
