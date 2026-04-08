@@ -5,29 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2cc228df-c7f1-48ad-b5a9-80d38a4ec2b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/cibertec/auth/controller/AuthController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/cibertec/auth/dto/request/RegisterRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/cibertec/auth/dto/response/AuthResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/cibertec/auth/entity/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/cibertec/auth/entity/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/cibertec/auth/exception/BadRequestException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/cibertec/auth/exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/cibertec/auth/exception/ResourceNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/cibertec/auth/repository/RoleRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/cibertec/auth/repository/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/cibertec/auth/security/SecurityBeansConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/cibertec/auth/security/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/cibertec/auth/service/AuthService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/cibertec/auth/service/JwtService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/cibertec/auth/service/impl/AuthServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/cibertec/auth/service/impl/JwtServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/cibertec/AuthServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/cibertec/auth/AuthServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/test/java/com/cibertec/AuthServiceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/test/java/com/cibertec/auth/AuthServiceApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
