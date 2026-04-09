@@ -1,7 +1,7 @@
 package com.cibertec.mapper;
 
-import com.cibertec.dto.external.OpenWeatherExternalDTO;
-import com.cibertec.dto.internal.OpenWeatherInternalDTO;
+import com.cibertec.dto.external.OpenWeatherExternalResponse;
+import com.cibertec.dto.internal.OpenWeatherInternalResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -16,5 +16,5 @@ public interface OpenWeatherDTOMapper {
             @Mapping(target = "humedad", source = "main.humidity"),
             @Mapping(target = "velocidad_viento", source = "wind.speed")
     })
-    OpenWeatherInternalDTO toInternalDTO(OpenWeatherExternalDTO externalDTO);
+    OpenWeatherInternalResponse toInternalDTO(OpenWeatherExternalResponse externalDTO);
 }

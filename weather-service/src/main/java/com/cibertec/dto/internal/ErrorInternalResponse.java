@@ -5,7 +5,7 @@ import lombok.Builder;
 import java.time.LocalDateTime;
 
 @Builder
-public record ErrorInternalDTO(
+public record ErrorInternalResponse(
         LocalDateTime timestamp,
         String message
 ) {

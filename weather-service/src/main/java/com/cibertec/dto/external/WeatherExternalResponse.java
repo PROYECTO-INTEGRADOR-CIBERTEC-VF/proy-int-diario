@@ -3,7 +3,7 @@ package com.cibertec.dto.external;
 import lombok.Builder;
 
 @Builder
-public record WeatherExternalDTO(
+public record WeatherExternalResponse(
         String description,
         String icon
 ) {

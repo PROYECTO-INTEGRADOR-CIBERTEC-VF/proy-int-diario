@@ -1,6 +1,6 @@
 package com.cibertec.client;
 
-import com.cibertec.dto.external.OpenWeatherExternalDTO;
+import com.cibertec.dto.external.OpenWeatherExternalResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +13,7 @@ public interface OpenWeatherClient {
             value = "/data/2.5/weather?units=metric",
             produces = { "application/json" }
     )
-    ResponseEntity<OpenWeatherExternalDTO> getWeatherData(
+    ResponseEntity<OpenWeatherExternalResponse> getWeatherData(
             @RequestParam Double lat,
             @RequestParam Double lon,
             @RequestParam String appid,

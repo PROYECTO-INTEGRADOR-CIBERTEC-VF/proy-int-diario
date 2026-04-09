@@ -1,7 +1,7 @@
 package com.cibertec.mapper;
 
-import com.cibertec.dto.external.WeatherExternalDTO;
-import com.cibertec.dto.internal.WeatherInternalDTO;
+import com.cibertec.dto.external.WeatherExternalResponse;
+import com.cibertec.dto.internal.WeatherInternalResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -12,5 +12,5 @@ public interface WeatherDTOMapper {
             @Mapping(target = "estado", source = "description"),
             @Mapping(target = "icono", source = "icon")
     })
-    WeatherInternalDTO toInternalDTO(WeatherExternalDTO externalDTO);
+    WeatherInternalResponse toInternalDTO(WeatherExternalResponse externalDTO);
 }

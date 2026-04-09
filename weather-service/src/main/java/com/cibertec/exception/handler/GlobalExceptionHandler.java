@@ -1,6 +1,6 @@
 package com.cibertec.exception.handler;
 
-import com.cibertec.dto.internal.ErrorInternalDTO;
+import com.cibertec.dto.internal.ErrorInternalResponse;
 import com.cibertec.exception.LocationNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,38 +18,38 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> methodArgumentTypeMismatchExceptionHandler(
             MethodArgumentTypeMismatchException exception
     ) {
-        ErrorInternalDTO errorInternalDTO = ErrorInternalDTO
+        ErrorInternalResponse errorInternalResponse = ErrorInternalResponse
                 .builder()
                 .message(exception.getMessage())
                 .timestamp(LocalDateTime.now())
                 .build();
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorInternalDTO);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorInternalResponse);
     }
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public ResponseEntity<?> missingServletRequestParameterExceptionHandler(
             MissingServletRequestParameterException exception
     ) {
-        ErrorInternalDTO errorInternalDTO = ErrorInternalDTO
+        ErrorInternalResponse errorInternalResponse = ErrorInternalResponse
                 .builder()
                 .message(exception.getMessage())
                 .timestamp(LocalDateTime.now())
                 .build();
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorInternalDTO);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorInternalResponse);
     }
 
     @ExceptionHandler(LocationNotFoundException.class)
     public ResponseEntity<?> locationNotFoundExceptionHandler(
             LocationNotFoundException exception
     ) {
-        ErrorInternalDTO errorInternalDTO = ErrorInternalDTO
+        ErrorInternalResponse errorInternalResponse = ErrorInternalResponse
                 .builder()
                 .message(exception.getMessage())
                 .timestamp(LocalDateTime.now())
                 .build();
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorInternalDTO);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorInternalResponse);
     }
 }
