@@ -1,6 +1,8 @@
 spring:
   application:
     name: weather-service
+  config:
+    import: optional:configserver:http://localhost:8888
 
 openweather:
   api:
