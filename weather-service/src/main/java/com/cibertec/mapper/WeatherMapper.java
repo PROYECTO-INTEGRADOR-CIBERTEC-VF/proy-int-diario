@@ -1,13 +1,13 @@
 package com.cibertec.mapper;
 
-import com.cibertec.dto.external.OpenWeatherExternalResponse;
-import com.cibertec.dto.internal.OpenWeatherInternalResponse;
+import com.cibertec.dto.external.WeatherApiResponse;
+import com.cibertec.dto.internal.WeatherResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-@Mapper(componentModel = "spring", uses = { WeatherDTOMapper.class })
-public interface OpenWeatherDTOMapper {
+@Mapper(componentModel = "spring", uses = { WeatherConditionMapper.class })
+public interface WeatherMapper {
     @Mappings({
             @Mapping(target = "ubicacion", source = "name"),
             @Mapping(target = "clima", source = "weather"),
@@ -16,5 +16,5 @@ public interface OpenWeatherDTOMapper {
             @Mapping(target = "humedad", source = "main.humidity"),
             @Mapping(target = "velocidad_viento", source = "wind.speed")
     })
-    OpenWeatherInternalResponse toInternalDTO(OpenWeatherExternalResponse externalDTO);
+    WeatherResponse toInternalDTO(WeatherApiResponse externalDTO);
 }

@@ -1,6 +1,6 @@
 package com.cibertec.exception.handler;
 
-import com.cibertec.dto.internal.ErrorInternalResponse;
+import com.cibertec.dto.internal.ErrorResponse;
 import com.cibertec.exception.LocationNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> methodArgumentTypeMismatchExceptionHandler(
             MethodArgumentTypeMismatchException exception
     ) {
-        ErrorInternalResponse errorInternalResponse = ErrorInternalResponse
+        ErrorResponse errorInternalResponse = ErrorResponse
                 .builder()
                 .message(exception.getMessage())
                 .timestamp(LocalDateTime.now())
@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> missingServletRequestParameterExceptionHandler(
             MissingServletRequestParameterException exception
     ) {
-        ErrorInternalResponse errorInternalResponse = ErrorInternalResponse
+        ErrorResponse errorInternalResponse = ErrorResponse
                 .builder()
                 .message(exception.getMessage())
                 .timestamp(LocalDateTime.now())
@@ -44,7 +44,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> locationNotFoundExceptionHandler(
             LocationNotFoundException exception
     ) {
-        ErrorInternalResponse errorInternalResponse = ErrorInternalResponse
+        ErrorResponse errorInternalResponse = ErrorResponse
                 .builder()
                 .message(exception.getMessage())
                 .timestamp(LocalDateTime.now())

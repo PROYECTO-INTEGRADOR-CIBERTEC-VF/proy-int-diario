@@ -3,7 +3,7 @@ package com.cibertec.dto.internal;
 import lombok.Builder;
 
 @Builder
-public record WeatherInternalResponse(
+public record WeatherConditionResponse(
         String estado,
         String icono
 ) {

@@ -3,7 +3,7 @@ package com.cibertec.dto.external;
 import lombok.Builder;
 
 @Builder
-public record WindExternalResponse(
+public record WindMetricsApiResponse(
         Double speed
 ) {
 }
