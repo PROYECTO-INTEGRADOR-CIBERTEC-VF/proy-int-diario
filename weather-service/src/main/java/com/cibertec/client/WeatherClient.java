@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface WeatherClient {
 
     @GetMapping(
-            value = "/data/2.5/weather?units=metric",
+            value = "/data/2.5/weather",
             produces = { "application/json" }
     )
     ResponseEntity<WeatherApiResponse> getWeatherData(
             @RequestParam Double lat,
             @RequestParam Double lon,
             @RequestParam String appid,
-            @RequestParam String lang
+            @RequestParam String lang,
+            @RequestParam String units
     );
 }

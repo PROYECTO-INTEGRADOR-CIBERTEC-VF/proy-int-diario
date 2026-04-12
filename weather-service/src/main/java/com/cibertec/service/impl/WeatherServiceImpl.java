@@ -21,11 +21,18 @@ public class WeatherServiceImpl implements WeatherService {
     @Value("${openweather.api.key}")
     private String apiKey;
 
-    @Override
-    public WeatherResponse getWeatherData(Double lat, Double lon, String lang) {
-        log.info("Sending coordinates to OpenWeather API: lat={}, long={}", lat, lon);
+    @Value("${openweather.api.lang}")
+    private String lang;
 
-        WeatherApiResponse externalDTO = weatherClient.getWeatherData(lat, lon, apiKey, lang).getBody();
+    @Value("${openweather.api.units}")
+    private String units;
+
+    @Override
+    public WeatherResponse getCurrentWeatherByCoordinates(Double lat, Double lon) {
+        log.info("Sending coordinates to OpenWeather API: latitude={}, longitude={}", lat, lon);
+        log.info("Sending default parameters: language={}, units={}", lang, units);
+
+        WeatherApiResponse externalDTO = weatherClient.getWeatherData(lat, lon, apiKey, lang, units).getBody();
 
         if (externalDTO != null && externalDTO.name().isBlank())
             throw new LocationNotFoundException("No location found for coordinates: lat=" + lat + ", lon=" + lon);

@@ -18,9 +18,8 @@ public class WeatherController {
     @GetMapping
     public ResponseEntity<?> obtenerDatosDeClima(
             @RequestParam Double lat,
-            @RequestParam Double lon,
-            @RequestParam(defaultValue = "es") String lang
+            @RequestParam Double lon
     ) {
-        return ResponseEntity.status(HttpStatus.OK).body(weatherService.getWeatherData(lat, lon, lang));
+        return ResponseEntity.status(HttpStatus.OK).body(weatherService.getCurrentWeatherByCoordinates(lat, lon));
     }
 }

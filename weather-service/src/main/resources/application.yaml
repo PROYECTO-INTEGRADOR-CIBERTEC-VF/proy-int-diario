@@ -7,3 +7,5 @@ spring:
 openweather:
   api:
     key: ${OPENWEATHER_API_KEY}
+    units: metric
+    lang: es
