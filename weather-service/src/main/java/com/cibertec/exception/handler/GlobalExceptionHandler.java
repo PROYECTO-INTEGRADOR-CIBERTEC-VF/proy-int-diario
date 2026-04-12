@@ -2,6 +2,7 @@ package com.cibertec.exception.handler;
 
 import com.cibertec.dto.internal.ErrorResponse;
 import com.cibertec.exception.LocationNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -11,6 +12,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import java.time.LocalDateTime;
 
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -24,6 +26,7 @@ public class GlobalExceptionHandler {
                 .timestamp(LocalDateTime.now())
                 .build();
 
+        log.warn("Warning: Wrong parameter type! {}", exception.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorInternalResponse);
     }
 
@@ -37,6 +40,7 @@ public class GlobalExceptionHandler {
                 .timestamp(LocalDateTime.now())
                 .build();
 
+        log.warn("Warning: Missing obligatory parameters! {}", exception.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorInternalResponse);
     }
 
@@ -50,6 +54,7 @@ public class GlobalExceptionHandler {
                 .timestamp(LocalDateTime.now())
                 .build();
 
+        log.error("Error: Location not found! {}", exception.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorInternalResponse);
     }
 }
