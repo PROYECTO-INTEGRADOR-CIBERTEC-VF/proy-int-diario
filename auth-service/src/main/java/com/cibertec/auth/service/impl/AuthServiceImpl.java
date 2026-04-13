@@ -1,21 +1,29 @@
 package com.cibertec.auth.service.impl;
 
-import com.cibertec.auth.dto.request.RegisterRequest;
-import com.cibertec.auth.dto.response.AuthResponse;
-import com.cibertec.auth.entity.Role;
-import com.cibertec.auth.entity.User;
-import com.cibertec.auth.exception.BadRequestException;
+import com.cibertec.auth.dto.auth.AuthRequest;
+import com.cibertec.auth.dto.auth.AuthResponse;
+import com.cibertec.auth.dto.request.UserRequest;
+import com.cibertec.auth.dto.response.UserResponse;
+import com.cibertec.auth.model.Role;
+import com.cibertec.auth.model.User;
+
 import com.cibertec.auth.exception.ResourceNotFoundException;
+import com.cibertec.auth.model.UserRole;
+import com.cibertec.auth.model.UserRoleId;
 import com.cibertec.auth.repository.RoleRepository;
 import com.cibertec.auth.repository.UserRepository;
+import com.cibertec.auth.repository.UserRoleRepository;
+import com.cibertec.auth.security.JwtUtil;
 import com.cibertec.auth.service.AuthService;
-import com.cibertec.auth.service.JwtService;
+import com.cibertec.auth.util.UserMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.security.core.Authentication;
 
 @Service
 @RequiredArgsConstructor
@@ -24,44 +32,82 @@ public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
-    private final JwtService jwtService;
+    private final UserRoleRepository userRoleRepository;
+    private final UserMapper userMapper;
+    private final AuthenticationManager authenticationManager;
+    private final JwtUtil jwtUtil;
 
     @Override
-    public AuthResponse register(RegisterRequest request) {
+    public AuthResponse login(AuthRequest authRequest) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        authRequest.emailOrUsername(),
+                        authRequest.password()
+                )
+        );
+        User user = userRepository.findByEmailOrUsername(authRequest.emailOrUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        List<UserRole> userRoles = userRoleRepository.findByUserId(user.getId());
+        List<String> roles = userRoles.stream()
+                .map(ur -> ur.getRole().getName())
+                .collect(Collectors.toList());
+        String token = jwtUtil.generateToken(user.getUsername(), roles);
+        return AuthResponse.builder()
+                .id(user.getId())
+                .token(token)
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .roles(roles)
+                .build();
+    }
 
-        if (userRepository.existsByEmail(request.email())) {
-            throw new BadRequestException("El email ya está registrado");
-        }
-
-        if (userRepository.existsByUsername(request.username())) {
-            throw new BadRequestException("El username ya está registrado");
-        }
+    @Override
+    public UserResponse register(UserRequest userRequest) {
+        System.out.println("Registering user: " + userRequest);
+        User user = userMapper.toEntity(userRequest);
+        System.out.println("Mapped user entity: " + user);
+        user.setPassword(passwordEncoder.encode(userRequest.password()));
+        user.setEnabled(true);
+        User savedUser = userRepository.save(user);
 
         Role userRole = roleRepository.findByName("ROLE_USER")
                 .orElseThrow(() -> new ResourceNotFoundException("No existe el rol ROLE_USER"));
-
-        User user = User.builder()
-                .username(request.username())
-                .email(request.email())
-                .passwordHash(passwordEncoder.encode(request.password()))
-                .firstName(request.firstName())
-                .lastName(request.lastName())
-                .enabled(true)
-                .roles(Set.of(userRole))
+        UserRoleId userRoleId = new UserRoleId(
+                savedUser.getId(),
+                userRole.getId()
+        );
+        UserRole userRoleEntity = UserRole.builder()
+                .id(userRoleId)
+                .user(savedUser)
+                .role(userRole)
                 .build();
+        userRoleRepository.save(userRoleEntity);
+        return userMapper.toDto(savedUser);
+    }
 
+
+    @Override
+    public UserResponse registerAdmin(UserRequest userRequest) {
+        System.out.println("Registering user: " + userRequest);
+        User user = userMapper.toEntity(userRequest);
+        System.out.println("Mapped user entity: " + user);
+        user.setPassword(passwordEncoder.encode(userRequest.password()));
+        user.setEnabled(true);
         User savedUser = userRepository.save(user);
 
-        String token = jwtService.generateToken(savedUser);
+        Role userRole = roleRepository.findByName("ROLE_ADMIN")
+                .orElseThrow(() -> new RuntimeException("Role ADMIN not found"));
 
-        return new AuthResponse(
+        UserRoleId userRoleId = new UserRoleId(
                 savedUser.getId(),
-                savedUser.getUsername(),
-                savedUser.getEmail(),
-                token,
-                savedUser.getRoles().stream()
-                        .map(Role::getName)
-                        .collect(Collectors.toSet())
+                userRole.getId()
         );
+        UserRole userRoleEntity = UserRole.builder()
+                .id(userRoleId)
+                .user(savedUser)
+                .role(userRole)
+                .build();
+        userRoleRepository.save(userRoleEntity);
+        return userMapper.toDto(savedUser);
     }
 }
