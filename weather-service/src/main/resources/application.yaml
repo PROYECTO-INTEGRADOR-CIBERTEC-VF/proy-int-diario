@@ -3,9 +3,3 @@ spring:
     name: weather-service
   config:
     import: optional:configserver:http://localhost:8888
-
-openweather:
-  api:
-    key: ${OPENWEATHER_API_KEY}
-    units: metric
-    lang: es

@@ -18,13 +18,13 @@ public class WeatherServiceImpl implements WeatherService {
     private final WeatherClient weatherClient;
     private final WeatherMapper weatherMapper;
 
-    @Value("${openweather.api.key}")
+    @Value("${weather.api.api-key}")
     private String apiKey;
 
-    @Value("${openweather.api.lang}")
+    @Value("${weather.api.default-lang}")
     private String lang;
 
-    @Value("${openweather.api.units}")
+    @Value("${weather.api.default-units}")
     private String units;
 
     @Override
