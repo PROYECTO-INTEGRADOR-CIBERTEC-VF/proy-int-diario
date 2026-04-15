@@ -1,16 +1,16 @@
-package com.cibertec.auth.entity;
+package com.cibertec.auth.model;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "roles")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -26,9 +26,9 @@ public class Role {
     @Column(length = 255)
     private String description;
 
-    @Column(name = "created_at", insertable = false, updatable = false)
+    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false)
     private LocalDateTime createdAt;
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users = new HashSet<>();
+    @OneToMany(mappedBy = "role")
+    private List<UserRole> userRoles;
 }
