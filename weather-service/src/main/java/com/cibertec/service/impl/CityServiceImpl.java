@@ -21,7 +21,7 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public List<CityResponse> getCities() {
-        List<City> cities = cityRepository.findAll();
+        List<City> cities = cityRepository.findAllByOrderByNameAsc();
 
         log.info("Fetching cities: {}", cities);
 
