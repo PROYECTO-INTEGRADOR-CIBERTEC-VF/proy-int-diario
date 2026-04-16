@@ -3,7 +3,3 @@ spring:
     name: weather-service
   config:
     import: optional:configserver:http://localhost:8888
-  datasource:
-    url: jdbc:mysql://localhost:3306/geocoordinates_db
-    username: root
-    password: ${MYSQL_PASSWORD}

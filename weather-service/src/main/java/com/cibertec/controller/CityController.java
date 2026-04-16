@@ -15,7 +15,7 @@ public class CityController {
     private final CityService cityService;
 
     @GetMapping
-    public ResponseEntity<?> findAllCities() {
+    public ResponseEntity<?> listarCiudades() {
         return ResponseEntity.status(HttpStatus.OK).body(cityService.getCities());
     }
 }
