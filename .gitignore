@@ -72,3 +72,4 @@ temp/
 *.tmp
 *.swp
 *~
+.idea
