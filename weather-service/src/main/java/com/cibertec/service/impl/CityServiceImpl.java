@@ -25,8 +25,12 @@ public class CityServiceImpl implements CityService {
 
         log.info("Fetching cities: {}", cities);
 
-        return cities.stream()
+        List<CityResponse> response = cities.stream()
                 .map(cityMapper::toDTO)
                 .collect(Collectors.toList());
+
+        log.info("Returning cities response: {}", response);
+
+        return response;
     }
 }

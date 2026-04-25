@@ -29,11 +29,11 @@ public class City {
     @Column(nullable = false, precision = 10, scale = 7)
     private BigDecimal longitude;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "state_id", nullable = false)
     private State state;
 }
