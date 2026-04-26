@@ -5,6 +5,8 @@ import lombok.Builder;
 @Builder
 public record CityResponse(
         Long id,
-        String name
+        String name,
+        String country,
+        String state
 ) {
 }

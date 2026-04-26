@@ -6,15 +6,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
 @Data
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "cities")
-public class City {
+@Table(name = "states")
+public class State {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,17 +21,7 @@ public class City {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false, precision = 10, scale = 7)
-    private BigDecimal latitude;
-
-    @Column(nullable = false, precision = 10, scale = 7)
-    private BigDecimal longitude;
-
     @ManyToOne
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "state_id", nullable = false)
-    private State state;
 }
