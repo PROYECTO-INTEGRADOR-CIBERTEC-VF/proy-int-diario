@@ -33,7 +33,7 @@ public class City {
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "state_id", nullable = false)
     private State state;
 }
