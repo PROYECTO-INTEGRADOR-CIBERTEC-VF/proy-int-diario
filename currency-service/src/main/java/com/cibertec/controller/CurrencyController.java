@@ -1,11 +1,10 @@
 package com.cibertec.controller;
 
+import com.cibertec.dto.ConversionRequest;
 import com.cibertec.service.CurrencyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.math.BigDecimal;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/currency")
@@ -14,19 +13,28 @@ public class CurrencyController {
 
     private final CurrencyService currencyService;
 
-
     @PostMapping("/convert")
-    public ResponseEntity<?> convertCurrency(@RequestBody Map<String, Object> request) {
-        String from = (String) request.get("from");
-        String to = (String) request.get("to");
-        BigDecimal amount = new BigDecimal(request.get("amount").toString());
+    public ResponseEntity<?> convertCurrency(@RequestBody ConversionRequest request) {
 
-        return ResponseEntity.ok(currencyService.convert(from, to, amount));
+        return ResponseEntity.ok(
+                currencyService.convert(
+                        request.from(),
+                        request.to(),
+                        request.amount()
+                )
+        );
     }
-
 
     @GetMapping("/exchange-rate/{name}")
     public ResponseEntity<?> getExchangeRate(@PathVariable String name) {
         return ResponseEntity.ok(currencyService.getCurrenciesByCountryName(name));
     }
+
+    @GetMapping("/currencies")
+    public ResponseEntity<?> getCurrencies() {
+        return ResponseEntity.ok(currencyService.getAvailableCurrencies());
+    }
+
+
 }
+
